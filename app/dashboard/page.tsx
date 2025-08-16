@@ -93,9 +93,9 @@ export default function DashboardPage() {
   }
 
   return (
-    <div className="grid gap-6">
+    <div className="grid gap-6 w-full">
       {/* Progress Tracking Section */}
-      <Card className="bg-grindgrid-card shadow-neumorphic rounded-lg p-6">
+      <Card className="bg-grindgrid-card shadow-neumorphic rounded-lg p-6 w-full">
         <CardHeader className="p-0 pb-4">
           <CardTitle className="text-2xl font-bold text-grindgrid-text-primary">Progress Tracking</CardTitle>
         </CardHeader>
@@ -182,9 +182,9 @@ export default function DashboardPage() {
       </Card>
 
       {/* Recent Notes and AI Chat Section */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 w-full">
         {/* Recent Notes Card */}
-        <Card className="bg-grindgrid-card shadow-neumorphic rounded-lg p-6">
+        <Card className="bg-grindgrid-card shadow-neumorphic rounded-lg p-6 w-full lg:w-auto">
           <CardHeader className="p-0 pb-4">
             <CardTitle className="text-2xl font-bold text-grindgrid-text-primary">Recent Notes</CardTitle>
           </CardHeader>
@@ -220,7 +220,7 @@ export default function DashboardPage() {
         </Card>
 
         {/* AI Chat Card */}
-        <Card className="bg-grindgrid-card shadow-neumorphic rounded-lg p-6">
+        <Card className="bg-grindgrid-card shadow-neumorphic rounded-lg p-6 w-full lg:w-auto">
           <CardHeader className="p-0 pb-4">
             <CardTitle className="text-2xl font-bold text-grindgrid-text-primary">AI Chat</CardTitle>
           </CardHeader>

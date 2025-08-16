@@ -9,15 +9,14 @@ export default async function DashboardLayout({
   children: React.ReactNode
 }) {
   const cookieStore = cookies()
-  const defaultOpen = cookieStore.get("sidebar:state")?.value === "true"
+  const defaultOpen = await (await cookieStore).get("sidebar:state")?.value === "true"
 
   return (
-    <div className="flex min-h-screen"> {/* Add a flex container to ensure layout works without SidebarProvider */}
+    <div className="flex min-h-screen w-full"> {/* Added w-full to ensure full width */}
       <AppSidebar />
-      <SidebarInset>
+      <SidebarInset className="flex flex-col w-full"> {/* Added flex-col and w-full to ensure proper layout */}
         <DashboardHeader />
-        {/* Added max-w-7xl and mx-auto to center the content */}
-        <main className="flex-1 p-4 md:p-6 lg:p-8 max-w-7xl mx-auto w-full">
+        <main className="flex-1 p-4 md:p-6 lg:p-8 w-full overflow-x-hidden"> {/* Removed max-w-7xl and mx-auto to use full width */}
           {children}
         </main>
       </SidebarInset>
