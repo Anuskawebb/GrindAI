@@ -1,7 +1,6 @@
 "use client"
 
 import type React from "react"
-
 import { useState, useEffect } from "react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
@@ -34,7 +33,7 @@ export default function LoginPage() {
         } = await supabase.auth.getUser()
 
         console.log("👤 Current user:", user?.email || "None")
-        
+
         // No redirects here - let the middleware handle redirects if needed
       } catch (error) {
         console.error("❌ Error checking auth:", error)
@@ -68,7 +67,7 @@ export default function LoginPage() {
 
       if (data.user) {
         console.log("✅ Login successful")
-        
+
         // Check if user has completed onboarding
         const { data: profile, error: profileError } = await supabase
           .from("profiles")
@@ -82,10 +81,10 @@ export default function LoginPage() {
 
         if (profile?.username) {
           console.log("👤 User has username, redirecting to dashboard")
-          window.location.href = '/dashboard'
+          window.location.href = "/dashboard"
         } else {
           console.log("👤 User needs onboarding, redirecting to onboarding")
-          window.location.href = '/onboarding'
+          window.location.href = "/onboarding"
         }
       }
     } catch (err: any) {
@@ -124,94 +123,149 @@ export default function LoginPage() {
   // Show loading while checking authentication
   if (checkingAuth) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-grindgrid-bg p-4">
-        <div className="text-grindgrid-text-secondary">Checking authentication...</div>
+      <div className="min-h-screen w-full flex items-center justify-center bg-grindgrid-bg px-4 py-8">
+        <div className="flex flex-col items-center space-y-4">
+          <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-grindgrid-accent"></div>
+          <div className="text-grindgrid-text-secondary text-sm">Checking authentication...</div>
+        </div>
       </div>
     )
   }
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-grindgrid-bg p-4">
-      <Card className="w-full max-w-md bg-grindgrid-card shadow-neumorphic rounded-lg">
-        <CardHeader className="text-center">
-          <CardTitle className="text-2xl font-bold text-grindgrid-text-primary">Log in to GrindGrid</CardTitle>
-          <CardDescription className="text-grindgrid-text-secondary">
-            Welcome back! Log in to continue mastering your skills.
-          </CardDescription>
-        </CardHeader>
-        <CardContent className="space-y-6">
-          <form onSubmit={handleLogin} className="space-y-4">
-            <div>
-              <Label htmlFor="email">Email</Label>
-              <Input
-                id="email"
-                type="email"
-                placeholder="m@example.com"
-                required
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                className="bg-grindgrid-bg shadow-neumorphic-inset"
+    <div className="min-h-screen w-full flex items-center justify-center bg-grindgrid-bg px-4 py-8 sm:px-6 lg:px-8">
+      <div className="w-full max-w-md space-y-8">
+        <Card className="w-full bg-grindgrid-card shadow-neumorphic rounded-xl border-0 overflow-hidden">
+          <CardHeader className="text-center space-y-2 px-6 pt-8 pb-6">
+            <div className="mx-auto w-16 h-16 bg-grindgrid-accent rounded-full flex items-center justify-center mb-4">
+              <svg
+                className="w-8 h-8 text-white"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
+                />
+              </svg>
+            </div>
+            <CardTitle className="text-2xl font-bold text-grindgrid-text-primary">Welcome Back</CardTitle>
+            <CardDescription className="text-grindgrid-text-secondary text-base">
+              Log in to continue mastering your skills with GrindGrid
+            </CardDescription>
+          </CardHeader>
+
+          <CardContent className="px-6 pb-8 space-y-6">
+            <form onSubmit={handleLogin} className="space-y-5">
+              <div className="space-y-2">
+                <Label htmlFor="email" className="text-sm font-medium text-grindgrid-text-primary">
+                  Email Address
+                </Label>
+                <Input
+                  id="email"
+                  type="email"
+                  placeholder="Enter your email"
+                  required
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="w-full h-12 bg-grindgrid-bg shadow-neumorphic-inset border-0 rounded-lg px-4 text-grindgrid-text-primary placeholder:text-grindgrid-text-secondary/60 focus:ring-2 focus:ring-grindgrid-accent focus:ring-offset-0 transition-all duration-200"
+                  disabled={loading}
+                />
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="password" className="text-sm font-medium text-grindgrid-text-primary">
+                  Password
+                </Label>
+                <Input
+                  id="password"
+                  type="password"
+                  placeholder="Enter your password"
+                  required
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="w-full h-12 bg-grindgrid-bg shadow-neumorphic-inset border-0 rounded-lg px-4 text-grindgrid-text-primary placeholder:text-grindgrid-text-secondary/60 focus:ring-2 focus:ring-grindgrid-accent focus:ring-offset-0 transition-all duration-200"
+                  disabled={loading}
+                />
+              </div>
+
+              {error && (
+                <div className="p-3 rounded-lg bg-red-50 border border-red-200">
+                  <p className="text-red-600 text-sm font-medium">{error}</p>
+                </div>
+              )}
+
+              {message && (
+                <div className="p-3 rounded-lg bg-green-50 border border-green-200">
+                  <p className="text-green-600 text-sm font-medium">{message}</p>
+                </div>
+              )}
+
+              <Button
+                type="submit"
+                className="w-full h-12 bg-grindgrid-accent hover:bg-grindgrid-accent/90 text-white font-semibold shadow-neumorphic-sm rounded-lg transition-all duration-200 hover:shadow-neumorphic focus:ring-2 focus:ring-grindgrid-accent focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed"
                 disabled={loading}
-              />
+              >
+                {loading ? (
+                  <div className="flex items-center space-x-2">
+                    <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
+                    <span>Logging in...</span>
+                  </div>
+                ) : (
+                  "Log In"
+                )}
+              </Button>
+            </form>
+
+            <div className="relative">
+              <div className="absolute inset-0 flex items-center">
+                <span className="w-full border-t border-grindgrid-shadow-dark/20" />
+              </div>
+              <div className="relative flex justify-center text-xs uppercase">
+                <span className="bg-grindgrid-card px-3 text-grindgrid-text-secondary font-medium">
+                  Or continue with
+                </span>
+              </div>
             </div>
-            <div>
-              <Label htmlFor="password">Password</Label>
-              <Input
-                id="password"
-                type="password"
-                required
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="bg-grindgrid-bg shadow-neumorphic-inset"
+
+            <div className="grid grid-cols-2 gap-3">
+              <Button
+                variant="outline"
+                onClick={handleGoogleSignIn}
+                className="h-12 bg-grindgrid-bg hover:bg-grindgrid-shadow-light border-0 shadow-neumorphic-sm hover:shadow-neumorphic text-grindgrid-text-primary font-medium rounded-lg transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
                 disabled={loading}
-              />
+              >
+                <Google className="mr-2 h-4 w-4" />
+                Google
+              </Button>
+              <Button
+                variant="outline"
+                disabled
+                className="h-12 bg-grindgrid-bg border-0 shadow-neumorphic-sm text-grindgrid-text-secondary/50 font-medium rounded-lg cursor-not-allowed"
+              >
+                <Github className="mr-2 h-4 w-4" />
+                GitHub
+              </Button>
             </div>
-            {error && <p className="text-red-500 text-sm">{error}</p>}
-            {message && <p className="text-green-500 text-sm">{message}</p>}
-            <Button
-              type="submit"
-              className="w-full bg-grindgrid-accent text-white shadow-neumorphic-sm hover:bg-grindgrid-accent/90"
-              disabled={loading}
-            >
-              {loading ? "Logging in..." : "Log In"}
-            </Button>
-          </form>
 
-          <div className="relative">
-            <div className="absolute inset-0 flex items-center">
-              <span className="w-full border-t border-grindgrid-shadow-dark" />
+            <div className="text-center">
+              <p className="text-sm text-grindgrid-text-secondary">
+                Don't have an account?{" "}
+                <Link
+                  href="/signup"
+                  className="font-semibold text-grindgrid-accent hover:text-grindgrid-accent/80 transition-colors duration-200 hover:underline"
+                >
+                  Sign Up
+                </Link>
+              </p>
             </div>
-            <div className="relative flex justify-center text-xs uppercase">
-              <span className="bg-grindgrid-card px-2 text-grindgrid-text-secondary">Or continue with</span>
-            </div>
-          </div>
-
-          <div className="grid grid-cols-2 gap-4">
-            <Button
-              variant="outline"
-              onClick={handleGoogleSignIn}
-              className="bg-grindgrid-bg shadow-neumorphic-sm hover:bg-grindgrid-shadow-light"
-              disabled={loading}
-            >
-              <Google className="mr-2 h-4 w-4" /> Google
-            </Button>
-            <Button
-              variant="outline"
-              disabled
-              className="bg-grindgrid-bg shadow-neumorphic-sm hover:bg-grindgrid-shadow-light"
-            >
-              <Github className="mr-2 h-4 w-4" /> GitHub
-            </Button>
-          </div>
-
-          <div className="mt-4 text-center text-sm text-grindgrid-text-secondary">
-            Don't have an account?{" "}
-            <Link href="/signup" className="font-semibold text-grindgrid-accent hover:underline">
-              Sign Up
-            </Link>
-          </div>
-        </CardContent>
-      </Card>
+          </CardContent>
+        </Card>
+      </div>
     </div>
   )
 }
