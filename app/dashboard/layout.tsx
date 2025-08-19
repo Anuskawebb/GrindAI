@@ -12,7 +12,7 @@ export default async function DashboardLayout({
   const defaultOpen = await (await cookieStore).get("sidebar:state")?.value === "true"
 
   return (
-    <div className="flex min-h-screen w-full"> {/* Added w-full to ensure full width */}
+    <div className="flex min-h-screen w-full bg-grindgrid-bg text-grindgrid-text-primary"> {/* Added grindgrid theme colors */}
       <AppSidebar />
       <SidebarInset className="flex flex-col w-full"> {/* Added flex-col and w-full to ensure proper layout */}
         <DashboardHeader />

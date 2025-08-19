@@ -95,7 +95,7 @@ export default function DashboardPage() {
   return (
     <div className="grid gap-6 w-full">
       {/* Progress Tracking Section */}
-      <Card className="bg-grindgrid-card shadow-neumorphic rounded-lg p-6 w-full">
+      <Card className="bg-grindgrid-card shadow-neumorphic rounded-lg p-6 w-full border-none">
         <CardHeader className="p-0 pb-4">
           <CardTitle className="text-2xl font-bold text-grindgrid-text-primary">Progress Tracking</CardTitle>
         </CardHeader>
@@ -111,14 +111,15 @@ export default function DashboardPage() {
                   bottom: 5,
                 }}
               >
-                <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--grindgrid-shadow-dark))" />
-                <XAxis dataKey="name" stroke="hsl(var(--grindgrid-text-secondary))" />
-                <YAxis stroke="hsl(var(--grindgrid-text-secondary))" domain={[0, 200]} />
+                <CartesianGrid strokeDasharray="3 3" stroke="hsl(220 25% 25%)" />
+                <XAxis dataKey="name" stroke="hsl(0 0% 95%)" tick={{ fill: 'hsl(0 0% 95%)', fontSize: 12 }} />
+                <YAxis stroke="hsl(0 0% 95%)" domain={[0, 200]} tick={{ fill: 'hsl(0 0% 95%)', fontSize: 12 }} />
                 <Tooltip
                   contentStyle={{
-                    backgroundColor: "hsl(var(--grindgrid-card))",
-                    border: "1px solid hsl(var(--grindgrid-shadow-dark))",
+                    backgroundColor: "hsl(220 25% 20%)",
+                    border: "none",
                     borderRadius: "0.5rem",
+                    boxShadow: "0 4px 12px rgba(0, 0, 0, 0.3)"
                   }}
                 />
                 <defs>
@@ -169,7 +170,7 @@ export default function DashboardPage() {
             <div
               className="relative h-32 w-32 rounded-full flex items-center justify-center text-grindgrid-text-primary font-bold text-3xl"
               style={{
-                background: `conic-gradient(hsl(217.2 91.2% 59.8%) ${totalProgress}%, hsl(220 13% 85%) 0%)`,
+                background: `conic-gradient(hsl(217.2 91.2% 59.8%) ${totalProgress}%, hsl(220 25% 25%) 0%)`,
               }}
             >
               <div className="absolute inset-[10px] bg-grindgrid-card rounded-full flex items-center justify-center shadow-neumorphic-inset">
@@ -184,7 +185,7 @@ export default function DashboardPage() {
       {/* Recent Notes and AI Chat Section */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 w-full">
         {/* Recent Notes Card */}
-        <Card className="bg-grindgrid-card shadow-neumorphic rounded-lg p-6 w-full lg:w-auto">
+        <Card className="bg-grindgrid-card shadow-neumorphic rounded-lg p-6 w-full lg:w-auto border-none">
           <CardHeader className="p-0 pb-4">
             <CardTitle className="text-2xl font-bold text-grindgrid-text-primary">Recent Notes</CardTitle>
           </CardHeader>
@@ -220,7 +221,7 @@ export default function DashboardPage() {
         </Card>
 
         {/* AI Chat Card */}
-        <Card className="bg-grindgrid-card shadow-neumorphic rounded-lg p-6 w-full lg:w-auto">
+        <Card className="bg-grindgrid-card shadow-neumorphic rounded-lg p-6 w-full lg:w-auto border-none">
           <CardHeader className="p-0 pb-4">
             <CardTitle className="text-2xl font-bold text-grindgrid-text-primary">AI Chat</CardTitle>
           </CardHeader>

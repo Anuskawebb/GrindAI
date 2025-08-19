@@ -66,25 +66,32 @@ export function AppSidebar() {
   ]
 
   return (
-    <Sidebar>
+    <Sidebar className="bg-grindgrid-bg text-grindgrid-text-primary border-r border-grindgrid-shadow-dark">
       <SidebarHeader>
-        <Link href="/" className="flex items-center gap-2 font-semibold">
+        <Link href="/" className="flex items-center gap-2 font-semibold text-grindgrid-text-primary">
           <Image src="/placeholder.svg?height=24&width=24" alt="GrindGrid Logo" width={24} height={24} />
           <span className="text-lg">GrindGrid</span>
         </Link>
         {/* Removed search input */}
       </SidebarHeader>
 
-      <SidebarContent>
+      <SidebarContent className="p-2">
         <SidebarGroup>
-          <SidebarGroupLabel>Main Menu</SidebarGroupLabel>
+          <SidebarGroupLabel className="text-grindgrid-text-secondary">Menu</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {menuItems.map((item) => (
                 <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild isActive={pathname === item.href}>
-                    <Link href={item.href}>
-                      <item.icon />
+                  <SidebarMenuButton 
+                    asChild 
+                    isActive={pathname === item.href}
+                    className={cn(
+                      "hover:bg-grindgrid-card hover:text-grindgrid-accent transition-colors",
+                      pathname === item.href && "text-grindgrid-accent bg-grindgrid-card shadow-neumorphic-sm"
+                    )}
+                  >
+                    <Link href={item.href} className="flex items-center gap-2">
+                      <item.icon className={cn("h-4 w-4", pathname === item.href ? "text-grindgrid-accent" : "text-grindgrid-text-primary")} />
                       <span>{item.title}</span>
                     </Link>
                   </SidebarMenuButton>
@@ -99,28 +106,29 @@ export function AppSidebar() {
         {/* Removed Projects collapsible */}
       </SidebarContent>
 
-      <SidebarFooter>
+      <SidebarFooter className="border-t border-grindgrid-shadow-dark">
         <SidebarMenu>
           <SidebarMenuItem>
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <SidebarMenuButton>
-                  <span className="h-2 w-2 rounded-full bg-green-500" />
-                  Username
-                  <span className="ml-auto h-4 w-4" />
+                <SidebarMenuButton className="text-grindgrid-text-primary hover:text-grindgrid-accent hover:bg-grindgrid-card transition-colors">
+                  <div className="flex items-center gap-2">
+                    <span className="text-sm">Username</span>
+                  </div>
+                  <div className="ml-auto flex items-center gap-1">
+                    <div className="h-2 w-2 rounded-full bg-grindgrid-accent" />
+                    <span className="text-xs text-grindgrid-text-secondary">Online</span>
+                  </div>
                 </SidebarMenuButton>
               </DropdownMenuTrigger>
-              <DropdownMenuContent
-                side="top"
-                className="w-[--radix-popper-anchor-width] bg-grindgrid-card shadow-neumorphic rounded-lg"
-              >
-                <DropdownMenuItem>
+              <DropdownMenuContent className="bg-grindgrid-card shadow-neumorphic" align="start" side="top">
+                <DropdownMenuItem className="text-grindgrid-text-primary hover:text-grindgrid-accent hover:bg-grindgrid-bg">
                   <span>Account</span>
                 </DropdownMenuItem>
-                <DropdownMenuItem>
+                <DropdownMenuItem className="text-grindgrid-text-primary hover:text-grindgrid-accent hover:bg-grindgrid-bg">
                   <span>Billing</span>
                 </DropdownMenuItem>
-                <DropdownMenuItem>
+                <DropdownMenuItem className="text-grindgrid-text-primary hover:text-destructive hover:bg-grindgrid-bg">
                   <span>Sign out</span>
                 </DropdownMenuItem>
               </DropdownMenuContent>

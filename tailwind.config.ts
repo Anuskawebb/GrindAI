@@ -47,14 +47,14 @@ const config = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
-        // Custom colors for neumorphic/SkillForge style
-        'grindgrid-bg': 'hsl(220 13% 95%)', // Light background for neumorphism
-        'grindgrid-card': 'hsl(220 13% 98%)', // Slightly lighter card background
-        'grindgrid-accent': 'hsl(217.2 91.2% 59.8%)', // Bright blue accent
-        'grindgrid-shadow-light': 'hsl(220 13% 100%)', // Light shadow for neumorphism
-        'grindgrid-shadow-dark': 'hsl(220 13% 85%)', // Dark shadow for neumorphism
-        'grindgrid-text-primary': 'hsl(240 5.3% 26.1%)',
-        'grindgrid-text-secondary': 'hsl(240 3.7% 45.9%)',
+        // Custom colors for dark blue theme based on screenshot
+        'grindgrid-bg': 'hsl(220 30% 15%)', // Dark blue background
+        'grindgrid-card': 'hsl(220 25% 20%)', // Slightly lighter card background
+        'grindgrid-accent': 'hsl(217.2 91.2% 59.8%)', // Bright blue accent (keeping this)
+        'grindgrid-shadow-light': 'hsl(220 25% 25%)', // Lighter shadow for dark theme
+        'grindgrid-shadow-dark': 'hsl(220 30% 10%)', // Darker shadow for dark theme
+        'grindgrid-text-primary': 'hsl(0 0% 95%)', // Light text for dark background
+        'grindgrid-text-secondary': 'hsl(220 15% 70%)', // Slightly dimmed secondary text
       },
       borderRadius: {
         lg: "0.75rem",
@@ -76,9 +76,9 @@ const config = {
         "accordion-up": "accordion-up 0.2s ease-out",
       },
       boxShadow: {
-        'neumorphic': '8px 8px 16px hsl(var(--grindgrid-shadow-dark)), -8px -8px 16px hsl(var(--grindgrid-shadow-light))',
-        'neumorphic-sm': '4px 4px 8px hsl(var(--grindgrid-shadow-dark)), -4px -4px 8px hsl(var(--grindgrid-shadow-light))',
-        'neumorphic-inset': 'inset 4px 4px 8px hsl(var(--grindgrid-shadow-dark)), inset -4px -4px 8px hsl(var(--grindgrid-shadow-light))',
+        'neumorphic': '0 4px 12px rgba(0, 0, 0, 0.3)',
+        'neumorphic-sm': '0 2px 6px rgba(0, 0, 0, 0.25)',
+        'neumorphic-inset': 'inset 0 2px 4px rgba(0, 0, 0, 0.3)',
       },
     },
   },
