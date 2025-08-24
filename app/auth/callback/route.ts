@@ -11,7 +11,7 @@ export async function GET(request: Request) {
     if (code) {
       console.log('🔄 Exchanging code for session')
       try {
-        await supabase.auth.exchangeCodeForSession(code)
+        await (await supabase).auth.exchangeCodeForSession(code)
       } catch (exchangeError) {
         console.error('❌ Error exchanging code for session:', exchangeError)
         return NextResponse.redirect(requestUrl.origin + '/login?error=session_exchange_failed', { status: 302 })
@@ -20,7 +20,7 @@ export async function GET(request: Request) {
 
     // Check if user has completed onboarding
     try {
-      const { data: { user }, error: userError } = await supabase.auth.getUser()
+      const { data: { user }, error: userError } = await (await supabase).auth.getUser()
       
       if (userError || !user) {
         console.error('❌ Error getting user or no user found:', userError)
@@ -30,7 +30,7 @@ export async function GET(request: Request) {
       console.log('✅ User authenticated:', user.email)
       
       try {
-        const { data: profileData, error: profileError } = await supabase
+        const { data: profileData, error: profileError } = await (await supabase)
           .from("profiles")
           .select("username")
           .eq("id", user.id)

@@ -14,12 +14,12 @@ type Note = Tables<'notes'>;
 
 export default async function NotesPage() {
   const supabase = createSupabaseServerClient();
-  const { data: { user } } = await supabase.auth.getUser();
+  const { data: { user } } = await (await supabase).auth.getUser();
 
   let notes: Note[] = [];
 
   if (user) {
-    const { data, error } = await supabase
+    const { data, error } = await (await supabase)
       .from('notes')
       .select('*')
       .eq('user_id', user.id)

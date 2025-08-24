@@ -6,7 +6,7 @@ import { TablesInsert, TablesUpdate } from '@/types/supabase'
 
 export async function createNote(content: string) {
   const supabase = createSupabaseServerClient()
-  const { data: { user } } = await supabase.auth.getUser()
+  const { data: { user } } = await (await supabase).auth.getUser()
 
   if (!user) {
     return { error: 'User not authenticated.' }
@@ -16,7 +16,7 @@ export async function createNote(content: string) {
     return { error: 'Note content cannot be empty.' }
   }
 
-  const { data, error } = await supabase
+  const { data, error } = await (await supabase)
     .from('notes')
     .insert({ user_id: user.id, content: content })
     .select()
@@ -34,7 +34,7 @@ export async function createNote(content: string) {
 
 export async function updateNote(id: string, content: string) {
   const supabase = createSupabaseServerClient()
-  const { data: { user } } = await supabase.auth.getUser()
+  const { data: { user } } = await (await supabase).auth.getUser()
 
   if (!user) {
     return { error: 'User not authenticated.' }
@@ -44,7 +44,7 @@ export async function updateNote(id: string, content: string) {
     return { error: 'Note content cannot be empty.' }
   }
 
-  const { data, error } = await supabase
+  const { data, error } = await (await supabase)
     .from('notes')
     .update({ content: content, updated_at: new Date().toISOString() })
     .eq('id', id)
@@ -64,13 +64,13 @@ export async function updateNote(id: string, content: string) {
 
 export async function deleteNote(id: string) {
   const supabase = createSupabaseServerClient()
-  const { data: { user } } = await supabase.auth.getUser()
+  const { data: { user } } = await (await supabase).auth.getUser()
 
   if (!user) {
     return { error: 'User not authenticated.' }
   }
 
-  const { error } = await supabase
+  const { error } = await (await supabase)
     .from('notes')
     .delete()
     .eq('id', id)

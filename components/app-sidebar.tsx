@@ -66,9 +66,9 @@ export function AppSidebar() {
   ]
 
   return (
-    <Sidebar className="bg-grindgrid-bg text-grindgrid-text-primary border-r border-grindgrid-shadow-dark">
+    <Sidebar className="bg-white text-gray-900 border-r border-gray-200">
       <SidebarHeader>
-        <Link href="/" className="flex items-center gap-2 font-semibold text-grindgrid-text-primary">
+        <Link href="/" className="flex items-center gap-2 font-semibold text-gray-900">
           <Image src="/placeholder.svg?height=24&width=24" alt="GrindGrid Logo" width={24} height={24} />
           <span className="text-lg">GrindGrid</span>
         </Link>
@@ -77,7 +77,7 @@ export function AppSidebar() {
 
       <SidebarContent className="p-2">
         <SidebarGroup>
-          <SidebarGroupLabel className="text-grindgrid-text-secondary">Menu</SidebarGroupLabel>
+          <SidebarGroupLabel className="text-gray-600">Menu</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
               {menuItems.map((item) => (
@@ -86,12 +86,12 @@ export function AppSidebar() {
                     asChild 
                     isActive={pathname === item.href}
                     className={cn(
-                      "hover:bg-grindgrid-card hover:text-grindgrid-accent transition-colors",
-                      pathname === item.href && "text-grindgrid-accent bg-grindgrid-card shadow-neumorphic-sm"
+                      "hover:bg-gray-100 hover:text-blue-600 transition-colors",
+                      pathname === item.href && "text-blue-600 bg-blue-50"
                     )}
                   >
                     <Link href={item.href} className="flex items-center gap-2">
-                      <item.icon className={cn("h-4 w-4", pathname === item.href ? "text-grindgrid-accent" : "text-grindgrid-text-primary")} />
+                      <item.icon className={cn("h-4 w-4", pathname === item.href ? "text-blue-600" : "text-gray-900")} />
                       <span>{item.title}</span>
                     </Link>
                   </SidebarMenuButton>
@@ -106,29 +106,29 @@ export function AppSidebar() {
         {/* Removed Projects collapsible */}
       </SidebarContent>
 
-      <SidebarFooter className="border-t border-grindgrid-shadow-dark">
+      <SidebarFooter className="border-t border-gray-200">
         <SidebarMenu>
           <SidebarMenuItem>
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
-                <SidebarMenuButton className="text-grindgrid-text-primary hover:text-grindgrid-accent hover:bg-grindgrid-card transition-colors">
+                <SidebarMenuButton className="text-gray-900 hover:text-blue-600 hover:bg-gray-100 transition-colors">
                   <div className="flex items-center gap-2">
                     <span className="text-sm">Username</span>
                   </div>
                   <div className="ml-auto flex items-center gap-1">
-                    <div className="h-2 w-2 rounded-full bg-grindgrid-accent" />
-                    <span className="text-xs text-grindgrid-text-secondary">Online</span>
+                    <div className="h-2 w-2 rounded-full bg-green-500" />
+                    <span className="text-xs text-gray-600">Online</span>
                   </div>
                 </SidebarMenuButton>
               </DropdownMenuTrigger>
-              <DropdownMenuContent className="bg-grindgrid-card shadow-neumorphic" align="start" side="top">
-                <DropdownMenuItem className="text-grindgrid-text-primary hover:text-grindgrid-accent hover:bg-grindgrid-bg">
+              <DropdownMenuContent className="bg-white shadow-lg border border-gray-200" align="start" side="top">
+                <DropdownMenuItem className="text-gray-900 hover:text-blue-600 hover:bg-gray-50">
                   <span>Account</span>
                 </DropdownMenuItem>
-                <DropdownMenuItem className="text-grindgrid-text-primary hover:text-grindgrid-accent hover:bg-grindgrid-bg">
+                <DropdownMenuItem className="text-gray-900 hover:text-blue-600 hover:bg-gray-50">
                   <span>Billing</span>
                 </DropdownMenuItem>
-                <DropdownMenuItem className="text-grindgrid-text-primary hover:text-destructive hover:bg-grindgrid-bg">
+                <DropdownMenuItem className="text-gray-900 hover:text-red-600 hover:bg-gray-50">
                   <span>Sign out</span>
                 </DropdownMenuItem>
               </DropdownMenuContent>

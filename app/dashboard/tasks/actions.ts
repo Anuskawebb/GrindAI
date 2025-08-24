@@ -6,13 +6,13 @@ import { TablesInsert, TablesUpdate } from '@/types/supabase'
 
 export async function createTask(task: TablesInsert<'tasks'>) {
   const supabase = createSupabaseServerClient()
-  const { data: { user } } = await supabase.auth.getUser()
+  const { data: { user } } = await (await supabase).auth.getUser()
 
   if (!user) {
     return { error: 'User not authenticated.' }
   }
 
-  const { data, error } = await supabase
+  const { data, error } = await (await supabase)
     .from('tasks')
     .insert({ ...task, user_id: user.id })
     .select()
@@ -30,13 +30,13 @@ export async function createTask(task: TablesInsert<'tasks'>) {
 
 export async function updateTask(id: string, updates: TablesUpdate<'tasks'>) {
   const supabase = createSupabaseServerClient()
-  const { data: { user } } = await supabase.auth.getUser()
+  const { data: { user } } = await (await supabase).auth.getUser()
 
   if (!user) {
     return { error: 'User not authenticated.' }
   }
 
-  const { data, error } = await supabase
+  const { data, error } = await (await supabase)
     .from('tasks')
     .update(updates)
     .eq('id', id)
@@ -56,13 +56,13 @@ export async function updateTask(id: string, updates: TablesUpdate<'tasks'>) {
 
 export async function deleteTask(id: string) {
   const supabase = createSupabaseServerClient()
-  const { data: { user } } = await supabase.auth.getUser()
+  const { data: { user } } = await (await supabase).auth.getUser()
 
   if (!user) {
     return { error: 'User not authenticated.' }
   }
 
-  const { error } = await supabase
+  const { error } = await (await supabase)
     .from('tasks')
     .delete()
     .eq('id', id)

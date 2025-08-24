@@ -9,10 +9,10 @@ export default async function DashboardLayout({
   children: React.ReactNode
 }) {
   const cookieStore = cookies()
-  const defaultOpen = await (await cookieStore).get("sidebar:state")?.value === "true"
+  const defaultOpen = (await cookieStore).get("sidebar:state")?.value === "true"
 
   return (
-    <div className="flex min-h-screen w-full bg-grindgrid-bg text-grindgrid-text-primary"> {/* Added grindgrid theme colors */}
+    <div className="flex min-h-screen w-full bg-gray-50 text-gray-900"> {/* Light theme colors */}
       <AppSidebar />
       <SidebarInset className="flex flex-col w-full"> {/* Added flex-col and w-full to ensure proper layout */}
         <DashboardHeader />

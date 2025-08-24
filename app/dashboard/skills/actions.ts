@@ -6,13 +6,13 @@ import { TablesInsert, TablesUpdate } from '@/types/supabase'
 
 export async function createSkill(skill: TablesInsert<'skills'>) {
   const supabase = createSupabaseServerClient()
-  const { data: { user } } = await supabase.auth.getUser()
+  const { data: { user } } = await (await supabase).auth.getUser()
 
   if (!user) {
     return { error: 'User not authenticated.' }
   }
 
-  const { data, error } = await supabase
+  const { data, error } = await (await supabase)
     .from('skills')
     .insert({ ...skill, user_id: user.id })
     .select()
@@ -30,13 +30,13 @@ export async function createSkill(skill: TablesInsert<'skills'>) {
 
 export async function updateSkill(id: string, skill: TablesUpdate<'skills'>) {
   const supabase = createSupabaseServerClient()
-  const { data: { user } } = await supabase.auth.getUser()
+  const { data: { user } } = await (await supabase).auth.getUser()
 
   if (!user) {
     return { error: 'User not authenticated.' }
   }
 
-  const { data, error } = await supabase
+  const { data, error } = await (await supabase)
     .from('skills')
     .update(skill)
     .eq('id', id)
@@ -56,13 +56,13 @@ export async function updateSkill(id: string, skill: TablesUpdate<'skills'>) {
 
 export async function deleteSkill(id: string) {
   const supabase = createSupabaseServerClient()
-  const { data: { user } } = await supabase.auth.getUser()
+  const { data: { user } } = await (await supabase).auth.getUser()
 
   if (!user) {
     return { error: 'User not authenticated.' }
   }
 
-  const { error } = await supabase
+  const { error } = await (await supabase)
     .from('skills')
     .delete()
     .eq('id', id)

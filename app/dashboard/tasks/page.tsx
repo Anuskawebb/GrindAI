@@ -7,19 +7,19 @@ type Skill = Tables<'skills'>;
 
 export default async function TasksPage() {
   const supabase = createSupabaseServerClient();
-  const { data: { user } } = await supabase.auth.getUser();
+  const { data: { user } } = await (await supabase).auth.getUser();
 
   let tasks: Task[] = [];
   let skills: Skill[] = [];
 
   if (user) {
-    const { data: tasksData, error: tasksError } = await supabase
+    const { data: tasksData, error: tasksError } = await (await supabase)
       .from('tasks')
       .select('*')
       .eq('user_id', user.id)
       .order('deadline', { ascending: true });
 
-    const { data: skillsData, error: skillsError } = await supabase
+    const { data: skillsData, error: skillsError } = await (await supabase)
       .from('skills')
       .select('*')
       .eq('user_id', user.id)

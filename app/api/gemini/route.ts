@@ -14,7 +14,7 @@ export async function POST(req: Request) {
     const supabase = createSupabaseServerClient()
     const {
       data: { user },
-    } = await supabase.auth.getUser()
+    } = await (await supabase).auth.getUser()
 
     if (!user) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 })
@@ -41,7 +41,7 @@ export async function POST(req: Request) {
     })
 
     // Save conversation to Supabase
-    const { error: dbError } = await supabase.from("conversations").insert({
+    const { error: dbError } = await (await supabase).from("conversations").insert({
       user_id: user.id,
       question: prompt,
       response: text,
