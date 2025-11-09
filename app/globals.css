@@ -91,6 +91,19 @@
     @apply border-border;
   }
   body {
-    @apply bg-grindgrid-bg text-foreground;
+    @apply bg-gray-50 text-foreground;
+    margin: 0;
+    padding: 0;
   }
+  html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+  }
+}
+
+/* Reaviz chart variables for incident report design theme */
+:root {
+  --reaviz-tick-fill: #9A9AAF;
+  --reaviz-gridline-stroke: rgba(126, 126, 143, 0.15);
 }

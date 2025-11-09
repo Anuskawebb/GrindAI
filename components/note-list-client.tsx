@@ -109,26 +109,26 @@ export function NoteListClient({ initialNotes }: NoteListClientProps) {
   };
 
   return (
-    <div className="grid gap-6">
-      <h1 className="text-3xl font-bold text-grindgrid-text-primary">My Notes</h1>
+    <div className="grid gap-6 w-full">
+      <h1 className="text-3xl font-bold text-gray-900">My Notes</h1>
 
-      <Card className="bg-grindgrid-card shadow-neumorphic rounded-lg">
-        <CardHeader>
-          <CardTitle>New Note</CardTitle>
+      <Card className="bg-white rounded-xl shadow-sm border-none">
+        <CardHeader className="p-7 pb-6">
+          <CardTitle className="text-3xl font-bold text-gray-900">New Note</CardTitle>
         </CardHeader>
-        <CardContent>
+        <CardContent className="p-7 pt-0">
           <form action={createFormAction}>
             <Textarea
               placeholder="Start typing your notes here..."
-              className="min-h-[200px] bg-grindgrid-bg shadow-neumorphic-inset"
-              name="noteContent" // Add name attribute for formData
+              className="min-h-[200px] bg-gray-50 border-gray-200"
+              name="noteContent"
               value={noteContent}
               onChange={(e) => setNoteContent(e.target.value)}
               disabled={isCreatePending}
             />
             <Button
               type="submit"
-              className="mt-4 bg-grindgrid-accent text-white shadow-neumorphic-sm hover:bg-grindgrid-accent/90"
+              className="mt-4 bg-orange-500 hover:bg-orange-600 text-white shadow-sm"
               disabled={isCreatePending}
             >
               {isCreatePending ? 'Saving...' : 'Save Note'}
@@ -137,34 +137,34 @@ export function NoteListClient({ initialNotes }: NoteListClientProps) {
         </CardContent>
       </Card>
 
-      <Card className="bg-grindgrid-card shadow-neumorphic rounded-lg">
-        <CardHeader>
-          <CardTitle>All Notes</CardTitle>
+      <Card className="bg-white rounded-xl shadow-sm border-none">
+        <CardHeader className="p-7 pb-6">
+          <CardTitle className="text-3xl font-bold text-gray-900">All Notes</CardTitle>
         </CardHeader>
-        <CardContent>
+        <CardContent className="p-7 pt-0">
           {notes.length === 0 ? (
-            <p className="text-grindgrid-text-secondary text-center">No notes added yet. Start writing a new note!</p>
+            <p className="text-gray-500 text-center">No notes added yet. Start writing a new note!</p>
           ) : (
-            <ul className="space-y-2">
+            <ul className="space-y-4">
               {notes.map((note) => (
-                <li key={note.id} className="p-2 rounded-md bg-grindgrid-bg shadow-neumorphic-inset flex flex-col sm:flex-row justify-between items-start sm:items-center">
+                <li key={note.id} className="p-4 rounded-lg bg-gray-50 flex flex-col sm:flex-row justify-between items-start sm:items-center">
                   <div className="flex-1 min-w-0">
-                    <h3 className="font-semibold text-grindgrid-text-primary truncate">
+                    <h3 className="font-semibold text-gray-900 truncate">
                       {note.content.split('\n')[0]}
                     </h3>
-                    <p className="text-sm text-grindgrid-text-secondary truncate">
+                    <p className="text-sm text-gray-500 truncate">
                       {note.content.split('\n').slice(1).join(' ') || 'No additional content'}
                     </p>
-                    <p className="text-xs text-grindgrid-text-secondary mt-1">
+                    <p className="text-xs text-gray-500 mt-1">
                       Saved: {new Date(note.created_at!).toLocaleDateString()}
                     </p>
                   </div>
                   <div className="flex gap-2 mt-2 sm:mt-0 sm:ml-4">
-                    <Button variant="ghost" size="sm" onClick={() => handleEdit(note)} className="text-grindgrid-accent hover:bg-grindgrid-accent/10">
+                    <Button variant="ghost" size="sm" onClick={() => handleEdit(note)} className="text-gray-600 hover:text-gray-900 hover:bg-gray-100">
                       <Edit className="h-4 w-4" />
                       <span className="sr-only">Edit note</span>
                     </Button>
-                    <Button variant="ghost" size="sm" onClick={() => confirmDelete(note.id)} className="text-red-500 hover:bg-red-500/10">
+                    <Button variant="ghost" size="sm" onClick={() => confirmDelete(note.id)} className="text-red-500 hover:bg-red-50">
                       <Trash2 className="h-4 w-4" />
                       <span className="sr-only">Delete note</span>
                     </Button>
@@ -178,10 +178,10 @@ export function NoteListClient({ initialNotes }: NoteListClientProps) {
 
       {/* Edit Note Dialog */}
       <Dialog open={isEditModalOpen} onOpenChange={setIsEditModalOpen}>
-        <DialogContent className="sm:max-w-[425px] bg-grindgrid-card shadow-neumorphic rounded-lg">
+        <DialogContent className="sm:max-w-[425px] bg-white shadow-sm rounded-xl">
           <DialogHeader>
-            <DialogTitle>Edit Note</DialogTitle>
-            <DialogDescription>
+            <DialogTitle className="text-gray-900">Edit Note</DialogTitle>
+            <DialogDescription className="text-gray-600">
               Make changes to your note here. Click save when you're done.
             </DialogDescription>
           </DialogHeader>
@@ -190,14 +190,14 @@ export function NoteListClient({ initialNotes }: NoteListClientProps) {
               name="editNoteContent"
               value={editNoteContent}
               onChange={(e) => setEditNoteContent(e.target.value)}
-              className="min-h-[200px] bg-grindgrid-bg shadow-neumorphic-inset"
+              className="min-h-[200px] bg-gray-50 border-gray-200"
               disabled={isUpdatePending}
             />
             <DialogFooter className="mt-4">
-              <Button type="button" variant="outline" onClick={() => setIsEditModalOpen(false)} disabled={isUpdatePending} className="bg-grindgrid-bg shadow-neumorphic-sm hover:bg-grindgrid-shadow-light">
+              <Button type="button" variant="outline" onClick={() => setIsEditModalOpen(false)} disabled={isUpdatePending} className="bg-white border-gray-200 hover:bg-gray-50">
                 Cancel
               </Button>
-              <Button type="submit" disabled={isUpdatePending} className="bg-grindgrid-accent text-white shadow-neumorphic-sm hover:bg-grindgrid-accent/90">
+              <Button type="submit" disabled={isUpdatePending} className="bg-orange-500 hover:bg-orange-600 text-white">
                 {isUpdatePending ? 'Saving...' : 'Save Changes'}
               </Button>
             </DialogFooter>
@@ -207,16 +207,16 @@ export function NoteListClient({ initialNotes }: NoteListClientProps) {
 
       {/* Delete Confirmation Dialog */}
       <AlertDialog open={isDeleteConfirmOpen} onOpenChange={setIsDeleteConfirmOpen}>
-        <AlertDialogContent className="bg-grindgrid-card shadow-neumorphic rounded-lg">
+        <AlertDialogContent className="bg-white shadow-sm rounded-xl">
           <AlertDialogHeader>
-            <AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
-            <AlertDialogDescription>
+            <AlertDialogTitle className="text-gray-900">Are you absolutely sure?</AlertDialogTitle>
+            <AlertDialogDescription className="text-gray-600">
               This action cannot be undone. This will permanently delete your note.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel className="bg-grindgrid-bg shadow-neumorphic-sm hover:bg-grindgrid-shadow-light">Cancel</AlertDialogCancel>
-            <AlertDialogAction onClick={executeDelete} className="bg-red-500 text-white shadow-neumorphic-sm hover:bg-red-600">
+            <AlertDialogCancel className="bg-white border-gray-200 hover:bg-gray-50">Cancel</AlertDialogCancel>
+            <AlertDialogAction onClick={executeDelete} className="bg-red-500 hover:bg-red-600 text-white">
               Yes, delete note
             </AlertDialogAction>
           </AlertDialogFooter>

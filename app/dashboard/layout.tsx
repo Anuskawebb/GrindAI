@@ -1,25 +1,20 @@
-import { cookies } from "next/headers"
 import { AppSidebar } from "@/components/app-sidebar"
 import { DashboardHeader } from "@/components/dashboard-header"
-import { SidebarInset } from "@/components/ui/sidebar"
 
 export default async function DashboardLayout({
   children,
 }: {
   children: React.ReactNode
 }) {
-  const cookieStore = cookies()
-  const defaultOpen = (await cookieStore).get("sidebar:state")?.value === "true"
-
   return (
-    <div className="flex min-h-screen w-full bg-gray-50 text-gray-900"> {/* Light theme colors */}
+    <div className="flex min-h-screen w-full bg-gray-50 text-gray-900">
       <AppSidebar />
-      <SidebarInset className="flex flex-col w-full"> {/* Added flex-col and w-full to ensure proper layout */}
+      <div className="flex flex-col w-full flex-1">
         <DashboardHeader />
-        <main className="flex-1 p-4 md:p-6 lg:p-8 w-full overflow-x-hidden"> {/* Removed max-w-7xl and mx-auto to use full width */}
+        <main className="flex-1 p-4 md:p-6 lg:p-8 w-full overflow-x-hidden">
           {children}
         </main>
-      </SidebarInset>
+      </div>
     </div>
   )
 }

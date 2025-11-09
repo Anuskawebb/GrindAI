@@ -162,30 +162,30 @@ export default function AIHubPage() {
   }
 
   return (
-    <div className="grid gap-6">
-      <h1 className="text-3xl font-bold text-grindgrid-text-primary">AI Hub</h1>
+    <div className="grid gap-6 w-full">
+      <h1 className="text-3xl font-bold text-gray-900">AI Hub</h1>
 
-      <Card className="bg-grindgrid-card shadow-neumorphic rounded-lg">
-        <CardHeader>
-          <CardTitle>AI Chat Assistant (Gemini)</CardTitle>
+      <Card className="bg-white rounded-xl shadow-sm border-none">
+        <CardHeader className="p-7 pb-6">
+          <CardTitle className="text-3xl font-bold text-gray-900">AI Chat Assistant (Gemini)</CardTitle>
         </CardHeader>
-        <CardContent>
+        <CardContent className="p-7 pt-0">
           <div
             ref={chatContainerRef}
-            className="h-64 border border-grindgrid-shadow-dark rounded-lg p-4 overflow-y-auto bg-grindgrid-bg shadow-neumorphic-inset flex flex-col space-y-2"
+            className="h-64 border border-gray-200 rounded-lg p-4 overflow-y-auto bg-gray-50 flex flex-col space-y-2"
           >
             {chatHistory.length === 0 && !loadingChat && (
-              <p className="text-grindgrid-text-secondary text-center italic">Start a conversation with Gemini!</p>
+              <p className="text-gray-500 text-center italic">Start a conversation with Gemini!</p>
             )}
             {chatHistory.map((msg, index) => (
               <div key={msg.id || index} className={`flex ${msg.response ? "justify-start" : "justify-end"}`}>
                 {msg.response ? (
-                  <div className="bg-grindgrid-accent/10 text-grindgrid-text-primary p-3 rounded-lg max-w-[80%] self-start">
+                  <div className="bg-gray-100 text-gray-900 p-3 rounded-lg max-w-[80%] self-start">
                     <p className="font-semibold">AI:</p>
                     <p>{msg.response}</p>
                   </div>
                 ) : (
-                  <div className="bg-grindgrid-accent text-white p-3 rounded-lg max-w-[80%] self-end">
+                  <div className="bg-orange-500 text-white p-3 rounded-lg max-w-[80%] self-end">
                     <p className="font-semibold">You:</p>
                     <p>{msg.question}</p>
                   </div>
@@ -194,7 +194,7 @@ export default function AIHubPage() {
             ))}
             {loadingChat && (
               <div className="flex justify-start">
-                <div className="bg-grindgrid-accent/10 text-grindgrid-text-primary p-3 rounded-lg max-w-[80%] self-start">
+                <div className="bg-gray-100 text-gray-900 p-3 rounded-lg max-w-[80%] self-start">
                   <p className="font-semibold">AI:</p>
                   <p>Typing...</p>
                 </div>
@@ -204,7 +204,7 @@ export default function AIHubPage() {
           <div className="flex gap-2 mt-4">
             <Input
               placeholder="Ask Gemini anything..."
-              className="flex-1 bg-grindgrid-bg shadow-neumorphic-inset"
+              className="flex-1 bg-gray-50 border-gray-200"
               value={currentInput}
               onChange={(e) => setCurrentInput(e.target.value)}
               onKeyPress={(e) => {
@@ -216,7 +216,7 @@ export default function AIHubPage() {
             />
             <Button
               onClick={handleSendMessage}
-              className="bg-grindgrid-accent text-white shadow-neumorphic-sm hover:bg-grindgrid-accent/90"
+              className="bg-orange-500 hover:bg-orange-600 text-white shadow-sm"
               disabled={loadingChat}
             >
               Send
@@ -226,52 +226,52 @@ export default function AIHubPage() {
       </Card>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <Card className="bg-grindgrid-card shadow-neumorphic rounded-lg">
-          <CardHeader>
-            <CardTitle>Generate Quiz</CardTitle>
+        <Card className="bg-white rounded-xl shadow-sm border-none">
+          <CardHeader className="p-7 pb-6">
+            <CardTitle className="text-3xl font-bold text-gray-900">Generate Quiz</CardTitle>
           </CardHeader>
-          <CardContent>
+          <CardContent className="p-7 pt-0">
             <Input
               placeholder="Enter quiz topic (e.g., 'React Hooks')"
-              className="mb-4 bg-grindgrid-bg shadow-neumorphic-inset"
+              className="mb-4 bg-gray-50 border-gray-200"
               value={quizTopic}
               onChange={(e) => setQuizTopic(e.target.value)}
               disabled={loadingQuiz}
             />
             <Button
               onClick={handleGenerateQuiz}
-              className="w-full bg-grindgrid-accent text-white shadow-neumorphic-sm hover:bg-grindgrid-accent/90"
+              className="w-full bg-orange-500 hover:bg-orange-600 text-white shadow-sm"
               disabled={loadingQuiz}
             >
               {loadingQuiz ? "Generating..." : "Generate MCQ Quiz"}
             </Button>
-            <div className="mt-4 p-4 border border-grindgrid-shadow-dark rounded-lg bg-grindgrid-bg shadow-neumorphic-inset min-h-[100px] overflow-y-auto">
+            <div className="mt-4 p-4 border border-gray-200 rounded-lg bg-gray-50 min-h-[100px] overflow-y-auto">
               {generatedQuiz ? (
-                <p className="text-grindgrid-text-primary whitespace-pre-wrap">{generatedQuiz}</p>
+                <p className="text-gray-900 whitespace-pre-wrap">{generatedQuiz}</p>
               ) : (
-                <p className="text-grindgrid-text-secondary">Quiz questions will appear here...</p>
+                <p className="text-gray-500">Quiz questions will appear here...</p>
               )}
             </div>
           </CardContent>
         </Card>
 
-        <Card className="bg-grindgrid-card shadow-neumorphic rounded-lg">
-          <CardHeader>
-            <CardTitle>Learning Suggestions</CardTitle>
+        <Card className="bg-white rounded-xl shadow-sm border-none">
+          <CardHeader className="p-7 pb-6">
+            <CardTitle className="text-3xl font-bold text-gray-900">Learning Suggestions</CardTitle>
           </CardHeader>
-          <CardContent>
+          <CardContent className="p-7 pt-0">
             <Button
               onClick={handleGetLearningSuggestions}
-              className="w-full bg-grindgrid-accent text-white shadow-neumorphic-sm hover:bg-grindgrid-accent/90"
+              className="w-full bg-orange-500 hover:bg-orange-600 text-white shadow-sm"
               disabled={loadingSuggestion}
             >
               {loadingSuggestion ? "Getting Suggestions..." : "Get Suggestions"}
             </Button>
-            <div className="mt-4 p-4 border border-grindgrid-shadow-dark rounded-lg bg-grindgrid-bg shadow-neumorphic-inset min-h-[100px] overflow-y-auto">
+            <div className="mt-4 p-4 border border-gray-200 rounded-lg bg-gray-50 min-h-[100px] overflow-y-auto">
               {learningSuggestion ? (
-                <p className="text-grindgrid-text-primary whitespace-pre-wrap">{learningSuggestion}</p>
+                <p className="text-gray-900 whitespace-pre-wrap">{learningSuggestion}</p>
               ) : (
-                <p className="text-grindgrid-text-secondary">
+                <p className="text-gray-500">
                   Ask Gemini "Based on my progress, what should I learn today?" and display answer
                 </p>
               )}

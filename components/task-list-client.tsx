@@ -84,16 +84,16 @@ export function TaskListClient({ initialTasks, initialSkills }: TaskListClientPr
   };
 
   return (
-    <div className="grid gap-6">
+    <div className="grid gap-6 w-full">
       <div className="flex justify-between items-center">
-        <h1 className="text-3xl font-bold text-grindgrid-text-primary">My Tasks</h1>
+        <h1 className="text-3xl font-bold text-gray-900">My Tasks</h1>
         <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
           <DialogTrigger asChild>
-            <Button onClick={() => setEditingTask(undefined)} className="bg-grindgrid-accent text-white shadow-neumorphic-sm hover:bg-grindgrid-accent/90">
+            <Button onClick={() => setEditingTask(undefined)} className="bg-orange-500 hover:bg-orange-600 text-white shadow-sm">
               <Plus className="mr-2 h-4 w-4" /> Add Task
             </Button>
           </DialogTrigger>
-          <DialogContent className="sm:max-w-[425px] bg-grindgrid-card shadow-neumorphic rounded-lg">
+          <DialogContent className="sm:max-w-[425px] bg-white shadow-sm rounded-xl">
             <DialogHeader>
               <DialogTitle>{editingTask ? 'Edit Task' : 'Add New Task'}</DialogTitle>
               <DialogDescription>
@@ -110,39 +110,39 @@ export function TaskListClient({ initialTasks, initialSkills }: TaskListClientPr
         </Dialog>
       </div>
 
-      <Card className="bg-grindgrid-card shadow-neumorphic rounded-lg">
-        <CardHeader>
-          <CardTitle>To-Do List</CardTitle>
+      <Card className="bg-white rounded-xl shadow-sm border-none">
+        <CardHeader className="p-7 pb-6">
+          <CardTitle className="text-3xl font-bold text-gray-900">To-Do List</CardTitle>
         </CardHeader>
-        <CardContent>
+        <CardContent className="p-7 pt-0">
           {tasks.length === 0 ? (
-            <p className="text-grindgrid-text-secondary text-center">No tasks added yet. Click "Add Task" to get started!</p>
+            <p className="text-gray-500 text-center">No tasks added yet. Click "Add Task" to get started!</p>
           ) : (
             <ul className="space-y-4">
               {tasks.map((task) => (
-                <li key={task.id} className="flex flex-col sm:flex-row items-start sm:items-center justify-between p-3 rounded-md bg-grindgrid-bg shadow-neumorphic-inset">
+                <li key={task.id} className="flex flex-col sm:flex-row items-start sm:items-center justify-between p-4 rounded-lg bg-gray-50">
                   <div className="flex items-center space-x-3 mb-2 sm:mb-0">
                     <Checkbox
                       id={`task-${task.id}`}
                       checked={task.is_completed || false}
                       onCheckedChange={() => handleToggleComplete(task)}
-                      className="h-5 w-5 border-grindgrid-accent data-[state=checked]:bg-grindgrid-accent data-[state=checked]:text-white"
+                      className="h-5 w-5 border-gray-300 data-[state=checked]:bg-orange-500 data-[state=checked]:text-white"
                     />
                     <label
                       htmlFor={`task-${task.id}`}
-                      className={`text-grindgrid-text-primary font-medium ${task.is_completed ? 'line-through text-grindgrid-text-secondary' : ''}`}
+                      className={`text-gray-900 font-medium ${task.is_completed ? 'line-through text-gray-500' : ''}`}
                     >
-                      {task.task_name} <span className="text-sm text-grindgrid-text-secondary">({getSkillName(task.skill_id)})</span>
+                      {task.task_name} <span className="text-sm text-gray-500">({getSkillName(task.skill_id)})</span>
                     </label>
                   </div>
                   <div className="flex items-center space-x-2 ml-auto sm:ml-0">
-                    <span className="text-sm text-grindgrid-text-secondary">
+                    <span className="text-sm text-gray-500">
                       Due: {task.deadline ? new Date(task.deadline).toLocaleDateString() : 'N/A'}
                     </span>
-                    <Button variant="ghost" size="sm" onClick={() => handleEdit(task)} className="text-grindgrid-accent hover:bg-grindgrid-accent/10">
+                    <Button variant="ghost" size="sm" onClick={() => handleEdit(task)} className="text-gray-600 hover:text-gray-900 hover:bg-gray-100">
                       <Edit className="h-4 w-4" />
                     </Button>
-                    <Button variant="ghost" size="sm" onClick={() => handleDelete(task.id)} className="text-red-500 hover:bg-red-500/10">
+                    <Button variant="ghost" size="sm" onClick={() => handleDelete(task.id)} className="text-red-500 hover:bg-red-50">
                       <Trash2 className="h-4 w-4" />
                     </Button>
                   </div>

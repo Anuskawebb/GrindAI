@@ -91,22 +91,22 @@ export default function SkillsPage() {
   }
 
   return (
-    <div className="grid gap-6">
+    <div className="grid gap-6 w-full">
       <div className="flex justify-between items-center">
-        <h1 className="text-3xl font-bold text-grindgrid-text-primary">My Skills</h1>
+        <h1 className="text-3xl font-bold text-gray-900">My Skills</h1>
         <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
           <DialogTrigger asChild>
             <Button
               onClick={() => setEditingSkill(undefined)}
-              className="bg-grindgrid-accent text-white shadow-neumorphic-sm hover:bg-grindgrid-accent/90"
+              className="bg-orange-500 hover:bg-orange-600 text-white shadow-sm"
             >
               <Plus className="mr-2 h-4 w-4" /> Add Skill
             </Button>
           </DialogTrigger>
-          <DialogContent className="sm:max-w-[425px] bg-grindgrid-card shadow-neumorphic rounded-lg">
+          <DialogContent className="sm:max-w-[425px] bg-white shadow-sm rounded-xl">
             <DialogHeader>
-              <DialogTitle>{editingSkill ? 'Edit Skill' : 'Add New Skill'}</DialogTitle>
-              <DialogDescription>
+              <DialogTitle className="text-gray-900">{editingSkill ? 'Edit Skill' : 'Add New Skill'}</DialogTitle>
+              <DialogDescription className="text-gray-600">
                 {editingSkill
                   ? 'Make changes to your skill here.'
                   : 'Add a new skill to your learning journey.'}
@@ -121,58 +121,58 @@ export default function SkillsPage() {
         </Dialog>
       </div>
 
-      <Card className="bg-grindgrid-card shadow-neumorphic rounded-lg">
-        <CardHeader>
-          <CardTitle>Skills List</CardTitle>
+      <Card className="bg-white rounded-xl shadow-sm border-none">
+        <CardHeader className="p-7 pb-6">
+          <CardTitle className="text-3xl font-bold text-gray-900">Skills List</CardTitle>
         </CardHeader>
-        <CardContent>
+        <CardContent className="p-7 pt-0">
           {loading ? (
-            <p className="text-grindgrid-text-secondary text-center">
+            <p className="text-gray-500 text-center">
               Loading skills...
             </p>
           ) : skills.length === 0 ? (
-            <p className="text-grindgrid-text-secondary text-center">
+            <p className="text-gray-500 text-center">
               No skills added yet. Click "Add Skill" to get started!
             </p>
           ) : (
             <div className="overflow-x-auto">
-              <table className="min-w-full divide-y divide-grindgrid-shadow-dark">
+              <table className="min-w-full divide-y divide-gray-200">
                 <thead>
                   <tr>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-grindgrid-text-secondary uppercase tracking-wider">
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                       Name
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-grindgrid-text-secondary uppercase tracking-wider">
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                       Start Date
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-grindgrid-text-secondary uppercase tracking-wider">
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                       Deadline
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-grindgrid-text-secondary uppercase tracking-wider">
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                       Progress
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-grindgrid-text-secondary uppercase tracking-wider">
+                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                       Actions
                     </th>
                   </tr>
                 </thead>
-                <tbody className="bg-grindgrid-card divide-y divide-grindgrid-shadow-dark">
+                <tbody className="bg-white divide-y divide-gray-200">
                   {skills.map((skill) => (
                     <tr key={skill.id}>
-                      <td className="px-6 py-4 whitespace-nowrap text-grindgrid-text-primary">
+                      <td className="px-6 py-4 whitespace-nowrap text-gray-900">
                         {skill.skill_name}
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-grindgrid-text-secondary">
+                      <td className="px-6 py-4 whitespace-nowrap text-gray-500">
                         {skill.start_date
                           ? new Date(skill.start_date).toLocaleDateString()
                           : 'N/A'}
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-grindgrid-text-secondary">
+                      <td className="px-6 py-4 whitespace-nowrap text-gray-500">
                         {skill.deadline
                           ? new Date(skill.deadline).toLocaleDateString()
                           : 'N/A'}
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-grindgrid-text-secondary">
+                      <td className="px-6 py-4 whitespace-nowrap text-gray-500">
                         {skill.progress_percentage}%
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
@@ -180,7 +180,7 @@ export default function SkillsPage() {
                           variant="ghost"
                           size="sm"
                           onClick={() => handleEdit(skill)}
-                          className="text-grindgrid-accent hover:bg-grindgrid-accent/10"
+                          className="text-gray-600 hover:text-gray-900 hover:bg-gray-100"
                         >
                           <Edit className="h-4 w-4" />
                         </Button>
@@ -188,7 +188,7 @@ export default function SkillsPage() {
                           variant="ghost"
                           size="sm"
                           onClick={() => handleDelete(skill.id)}
-                          className="text-red-500 hover:bg-red-500/10"
+                          className="text-red-500 hover:bg-red-50"
                         >
                           <Trash2 className="h-4 w-4" />
                         </Button>
