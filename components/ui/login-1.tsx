@@ -80,7 +80,7 @@ export default function LoginScreen({
             <p className="text-gray-600">
               {isLogin 
                 ? 'Continue mastering your skills and tracking your progress' 
-                : 'Join GrindGrid and begin your path to skill mastery'
+                : 'Join GrindApp and begin your path to skill mastery'
               }
             </p>
           </div>

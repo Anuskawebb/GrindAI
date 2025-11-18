@@ -107,3 +107,13 @@
   --reaviz-tick-fill: #9A9AAF;
   --reaviz-gridline-stroke: rgba(126, 126, 143, 0.15);
 }
+
+/* Typewriter cursor blink animation */
+@keyframes blink {
+  0%, 50% {
+    opacity: 1;
+  }
+  51%, 100% {
+    opacity: 0;
+  }
+}

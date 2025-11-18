@@ -121,7 +121,7 @@ export const Logo = () => {
         animate={{ opacity: 1 }}
         className="font-semibold text-gray-900 whitespace-pre"
       >
-        GrindGrid
+        GrindApp
       </motion.span>
     </Link>
   )

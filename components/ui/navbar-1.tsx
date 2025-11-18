@@ -33,7 +33,7 @@ const Navbar1 = () => {
                 </defs>
               </svg>
             </motion.div>
-            <span className="text-xl font-bold text-gray-900">GrindGrid</span>
+            <span className="text-xl font-bold text-gray-900">GrindApp</span>
           </Link>
         </div>
 

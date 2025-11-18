@@ -87,7 +87,7 @@ export default function OnboardingPage() {
     <div className="flex min-h-screen items-center justify-center bg-grindgrid-bg p-4">
       <Card className="w-full max-w-md bg-grindgrid-card shadow-neumorphic rounded-lg">
         <CardHeader className="text-center">
-          <CardTitle className="text-2xl font-bold text-grindgrid-text-primary">Welcome to GrindGrid!</CardTitle>
+          <CardTitle className="text-2xl font-bold text-grindgrid-text-primary">Welcome to GrindApp!</CardTitle>
           <CardDescription className="text-grindgrid-text-secondary">
             Let's set up your first skill.
           </CardDescription>
